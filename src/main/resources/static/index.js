@@ -1,3 +1,4 @@
+//declaring variables
 const baseURL = "http://localhost:8080";
 const entry_title = document.getElementById("entry-title");
 const entry_body = document.getElementById("entry");
@@ -5,10 +6,12 @@ const update = document.getElementById("update");
 const back = document.getElementById("back");
 const submit = document.getElementById("submit");
 let entry_list;
+let current_id = 0;
 var elements = document.querySelectorAll('[data-tw-bind]'), scope = {};
 let date = new Date();
 let today = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
 
+//implementing methods
 elements.forEach(function(element) {
     //execute scope setter
     if(element.type === 'text'|| element.type === 'textarea'){
@@ -81,21 +84,45 @@ const setup = ()=>{
     //         }
     //     }
 
+    //     let last_entry = entry_list[entry_list.length - 1];
+    //     if (last_entry.date === today){
+    //         current_id = last_entry.id;
+    //         scope['title'] = last_entry.title;
+    //         scope['data'] = last_entry.content;
+    //     }else{
+    //         current_id = 0;
+    //         scope['title'] = "";
+    //         scope['data'] = "";
+    //     }
     // });
 }
 
 // TODO: Complete this method
 const updateEntry = () =>{
     console.log("update clicked");
+    //sending the update
+    // fetch(baseURL+"/update",{
+    //     method:"POST",
+    //     body:{
+    //         entry:{
+    //             id: current_id,
+    //             heading: scope['title'],
+    //             content: scope['data'],
+    //         }
+    //     }
+    // }).then((response) =>{
+    //     if (response.status == 200){
+    //         alert("Entry updated successfully");
 
+    //     }else{
+    //         alert("There was some issue on the server end!!");
+    //     }
+    // })
 }
 
 // TODO: verify the correctness
 const submitEntry = () =>{
-    console.log("Submit clicked")
-    console.log(scope['title']);
-    console.log(scope['data'])
-    let date = new Date();
+    console.log("Submit clicked");
     if (scope['title'].trim() === ""){
         alert("PLEASE ENTER A TITLE!!")
         return;
@@ -136,17 +163,28 @@ const loadPrevious = (entry) =>{
         entry_title.disabled = true;
         entry_body.disabled = true;
     }
+    current_id = entry.id;
     scope['title'] = entry.heading;
     scope['data'] = entry.content;
 }
-//TODO: complete this function
+//TODO: verify the correctness of this function
 const loadCurrent = () =>{
     back.style.display = "none";
     submit.style.display = "block"; 
     entry_title.disabled = false;
     entry_body.disabled = false;
 
-
+    let last_entry = entry_list[entry_list.length - 1];
+    if (last_entry.date === today){
+        current_id = last_entry.id;
+        scope['title'] = last_entry.title;
+        scope['data'] = last_entry.content;
+    }else{
+        current_id = 0;
+        scope['title'] = "";
+        scope['data'] = "";
+    }
+    
 
 }
 
