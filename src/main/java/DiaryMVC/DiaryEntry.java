@@ -7,14 +7,14 @@ public class DiaryEntry {
 	
 	private Long Id;
 	private String title;
-	private String body;
-	private String datetime;
-	public DiaryEntry(Long id, String title, String body, String datetime) {
+	private String content;
+	private String date;
+	public DiaryEntry(Long id, String title, String content, String date) {
 //		super();
 		Id = id;
 		this.title = title;
-		this.body = body;
-		this.datetime = datetime;
+		this.content = content;
+		this.date = date;
 	}
 	public Long getId() {
 		return Id;
@@ -28,26 +28,26 @@ public class DiaryEntry {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getBody() {
-		return body;
+	public String getContent() {
+		return content;
 	}
-	public void setBody(String body) {
-		this.body = body;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getDatetime() {
-		return datetime;
+	public String getDate() {
+		return date;
 	}
-	public void setDatetime(String datetime) {
-		this.datetime = datetime;
+	public void setDate(String date) {
+		this.date = date;
 	}
 	@Override
 	public String toString() {
-		return "DiaryEntry [Id=" + Id + ", title=" + title + ", body=" + body + ", datetime=" + datetime + "]";
+		return "DiaryEntry [Id=" + Id + ", title=" + title + ", content=" + content + ", date=" + date + "]";
 	}
 	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
-		return Objects.hash(this.Id, this.title, this.body,  this.datetime);
+		return Objects.hash(this.Id, this.title, this.content,  this.date);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -58,7 +58,7 @@ public class DiaryEntry {
 		      return false;
 		    DiaryEntry entry = (DiaryEntry) obj;
 		    return Objects.equals(this.Id, entry.Id) && Objects.equals(this.title, entry.title)
-		        && Objects.equals(this.body, entry.body) && Objects.equals(this.datetime, entry.datetime);
+		        && Objects.equals(this.content, entry.content) && Objects.equals(this.date, entry.date);
 	}
 	
 	
