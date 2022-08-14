@@ -5,21 +5,21 @@ import java.util.Objects;
 
 public class DiaryEntry {
 	
-	private Long Id;
+	private int Id;
 	private String title;
 	private String content;
 	private String date;
-	public DiaryEntry(Long id, String title, String content, String date) {
+	public DiaryEntry(int id, String title, String content, String date) {
 //		super();
 		Id = id;
 		this.title = title;
 		this.content = content;
 		this.date = date;
 	}
-	public Long getId() {
+	public int getId() {
 		return Id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		Id = id;
 	}
 	public String getTitle() {
