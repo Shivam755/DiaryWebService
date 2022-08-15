@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class DiaryDAO {
+	
+//	public 
 
 	public int delete(int Id){
 		int status = 0;
