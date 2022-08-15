@@ -53,6 +53,7 @@ elements.forEach(function(element) {
     }
 });
 
+//TODO: verify correctness
 const setup = ()=>{
     console.log("Doc loaded")
     update.style.display = "none";
@@ -97,7 +98,7 @@ const setup = ()=>{
     // });
 }
 
-// TODO: Complete this method
+// TODO: verify correctness
 const updateEntry = () =>{
     console.log("update clicked");
     //sending the update

@@ -1,4 +1,4 @@
-package DiaryMVC;
+package com.innovative.webService;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,11 +1,11 @@
-package DiaryMVC;
+package com.innovative.webService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import DiaryMVC.DBConnector;
-
 public class DiaryDAO {
+	
+//	public 
 
 	public int delete(int Id){
 		int status = 0;
