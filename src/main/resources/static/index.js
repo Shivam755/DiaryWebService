@@ -74,10 +74,14 @@ const setup = ()=>{
 
     //     for(let page in entry_list){
     //         //Creating an li
-    //         li = document.createElement('li');
-    //         li.textContent = page.title + " " + page.date;
-    //         li.onclick = loadPrevious(page)
-    //         container.appendChild(li);
+            // li = document.createElement('li');
+            // li.onmouseenter = addButton(event,page);
+            // li.onmouseleave = removeButton(event);
+            // p = document.createElement("p");
+            // p.textContent = page.title + " " + page.date;
+            // p.onclick = loadPrevious(page)
+            // li.appendChild(p);
+            // container.appendChild(li);
 
     //         if (page.date === today){
     //             scope['title'] = page.title;
@@ -195,4 +199,32 @@ const unhighlight = () =>{
 
 const highlight = () =>{
     document.getElementById("entry-title").style = "font-family: 'Space Mono', monospace;font-size: 1rem; color: lightcoral;border: 0.15vw solid lightcoral;";
+}
+
+//TODO: verify correctness
+const addButton = (event,Dentry) =>{
+    const btn = document.createElement("button");
+    btn.innerText = "x";
+    btn.id = "delete";
+    btn.onclick = () => {
+        console.log("delete task");
+        console.log(Dentry)
+        // fetch(baseURL+"/diaryentry/"+Dentry.id,{
+        //     method: "DELETE"
+        // }).then(status => {
+        //     if (status === 1){
+        //         alert(`Entry ${Dentry.title} deleted successfully!!`);
+        //         const entries = document.getElementById("entries");
+        //         entries.removeChild(e.target);
+        //     }else{
+        //         alert("There was some issue on the backend!!")''
+        //     }
+        // })
+    }
+    event.target.appendChild(btn);
+}
+
+const removeButton = (e) =>{
+    const del = document.getElementById("delete");
+    e.target.removeChild(del);
 }

@@ -1,45 +1,65 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Diary</title>
-    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/index.css" />
   </head>
   <body onload="setup()">
     <div class="Container">
       <div class="notebook">
-      <header><h1>My Personal Journal</h1></header>
+        <header><h1>My Personal Journal</h1></header>
         <!-- Journal Entry Section -->
         <section class="page">
-            <input
-              type="text"
-              name="entry-title"
-              id="entry-title"
-              class="entry-text-title"
-              onfocus="highlight()"
-              onblur="unhighlight()"
-              data-tw-bind="title"
-              placeholder="Title ✏️"
-            />
-            <textarea
-              name="daily-entry"
-              id="entry"
-              class="entry-text-box"
-              placeholder="What's on your mind today? 💭"
-              data-tw-bind="data"
-            ></textarea>
-            <button id="submit" class="btn-main entry-submit-btn" onclick="submitEntry()">Submit</button>
-            <button class="btn-main entry-submit-btn" id="update" onclick="updateEntry()">Update</button>
-            
+          <input
+            type="text"
+            name="entry-title"
+            id="entry-title"
+            class="entry-text-title"
+            onfocus="highlight()"
+            onblur="unhighlight()"
+            data-tw-bind="title"
+            placeholder="Title ✏️"
+          />
+          <textarea
+            name="daily-entry"
+            id="entry"
+            class="entry-text-box"
+            placeholder="What's on your mind today? 💭"
+            data-tw-bind="data"
+          ></textarea>
+          <button
+            id="submit"
+            class="btn-main entry-submit-btn"
+            onclick="submitEntry()"
+          >
+            Submit
+          </button>
+          <button
+            class="btn-main entry-submit-btn"
+            id="update"
+            onclick="updateEntry()"
+          >
+            Update
+          </button>
         </section>
       </div>
       <!-- Journal Entry Results -->
       <aside id="index">
         <h3>Entries</h3>
         <ul id="entries">
-          <li v-for="entry in journalEntries" onclick="loadPrevious(entry)" :key="entry.title">{{entry.title}}({{entry.date}})</li>
+          <li
+            v-for="entry in journalEntries"
+            onmouseenter="addButton(event,entry)"
+            onmouseleave="removeButton(event)"
+            :key="entry.title"
+          >
+            <p onclick="loadPrevious(entry)">{{entry.title}}({{entry.date}}</p>
+          </li>
         </ul>
-        <button id="back" type="submit" onclick="loadCurrent()" ><i class='fa fa-arrow-left'>New Page</i></button>
+        <button id="back" type="submit" onclick="loadCurrent()">
+          <i class="fa fa-arrow-left">New Page</i>
+        </button>
       </aside>
     </div>
 
