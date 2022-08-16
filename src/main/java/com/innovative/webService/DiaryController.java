@@ -1,4 +1,6 @@
 package com.innovative.webService;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
 
@@ -6,9 +8,16 @@ import org.springframework.web.bind.annotation.*;
 public class DiaryController {
 	
 	@GetMapping("/entries")
-	public String entries() {
-		
-		return "hello world";
+	public List<DiaryEntry> viewAllEntries() {
+		List<DiaryEntry> list = DiaryDAO.getAllEntries();
+//		for(DiaryEntry de:list) {
+//			System.out.println(" ");
+//			System.out.println(de.getContent());
+//			System.out.println(de.getDate());
+//			System.out.println(de.getId());
+//			System.out.println(de.getTitle());
+//		}
+		return list;
 	}
 	
 	
@@ -25,4 +34,5 @@ public class DiaryController {
 //			//Something
 //		}
 	}
+	
 }
