@@ -9,13 +9,13 @@ public class DiaryEntry {
 	private String title;
 	private String content;
 	private String date;
-	public DiaryEntry(int id, String title, String content, String date) {
+	//public DiaryEntry(int id, String title, String content, String date) {
 //		super();
-		Id = id;
-		this.title = title;
-		this.content = content;
-		this.date = date;
-	}
+	//	Id = id;
+		//this.title = title;
+		//this.content = content;
+	//	this.date = date;
+	//}
 	public int getId() {
 		return Id;
 	}

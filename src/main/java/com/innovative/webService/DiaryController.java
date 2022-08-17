@@ -35,4 +35,14 @@ public class DiaryController {
 //		}
 	}
 	
-}
+	@PutMapping("/diaryentry/{Id}")
+	public int updateEntry(@PathVariable(value  = "Id") int Id, String title, String content, String date ) {
+		DiaryEntry de = new DiaryEntry();
+		de.setId(Id);
+		de.setTitle(title);
+		de.setContent(content);
+		de.setDate(date);
+		int status = DiaryDAO.update(de);
+		return status;	
+	}
+	}

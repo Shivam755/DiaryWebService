@@ -26,6 +26,24 @@ public class DiaryDAO {
 		return status;
 	}
 	
+	public static int update(DiaryEntry de) {
+		int status =0 ;
+		try {
+			Connection con = DBConnector.makeConnection();
+			PreparedStatement ps = con.prepareStatement("update diaryEntry set title=?, content=?,date=? where id=?");
+			ps.setString(1, de.getTitle());
+			ps.setString(2, de.getContent());
+			ps.setString(3, de.getDate());
+			ps.setInt(4, de.getId());
+			
+			System.out.println("Records Updated!");
+			con.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+	
 	public static List<DiaryEntry> getAllEntries(){
 		List<DiaryEntry> list = new ArrayList<DiaryEntry>();
 		try {
@@ -33,7 +51,7 @@ public class DiaryDAO {
 			PreparedStatement ps = con.prepareStatement("select * from diaryEntry");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				DiaryEntry de = new DiaryEntry(0, null, null, null);
+				DiaryEntry de = new DiaryEntry();
 				de.setId(rs.getInt(1));
 				de.setTitle(rs.getString(2));
 				de.setDate(rs.getString(3));
