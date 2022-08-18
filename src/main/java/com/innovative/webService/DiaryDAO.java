@@ -30,11 +30,11 @@ public class DiaryDAO {
 		int status =0 ;
 		try {
 			Connection con = DBConnector.makeConnection();
-			PreparedStatement ps = con.prepareStatement("update diaryEntry set title=?, content=?,date=? where id=?");
+			PreparedStatement ps = con.prepareStatement("update diaryEntry set heading=?, content=? where id=?");
 			ps.setString(1, de.getTitle());
 			ps.setString(2, de.getContent());
-			ps.setString(3, de.getDate());
-			ps.setInt(4, de.getId());
+			ps.setInt(3, de.getId());
+			status = ps.executeUpdate();
 			
 			System.out.println("Records Updated!");
 			con.close();
@@ -54,8 +54,8 @@ public class DiaryDAO {
 				DiaryEntry de = new DiaryEntry();
 				de.setId(rs.getInt(1));
 				de.setTitle(rs.getString(2));
-				de.setDate(rs.getString(3));
-				de.setContent(rs.getString(4));
+				de.setDate(rs.getString(4));
+				de.setContent(rs.getString(3));
 				list.add(de);
 				System.out.println(list);
 			}
@@ -64,6 +64,25 @@ public class DiaryDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public static DiaryEntry getEntryByID(int Id) {
+		DiaryEntry de = new DiaryEntry();
+		try {
+			Connection con = DBConnector.makeConnection();
+			PreparedStatement ps = con.prepareStatement("select * from diaryEntry where id = ?");
+			ps.setInt(1, Id);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			de.setId(rs.getInt(1));
+			de.setTitle(rs.getString(2));
+			de.setDate(rs.getString(4));
+			de.setContent(rs.getString(3));
+			con.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return de;
 	}
 }
 

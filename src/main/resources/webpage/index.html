@@ -47,16 +47,7 @@
       <!-- Journal Entry Results -->
       <aside id="index">
         <h3>Entries</h3>
-        <ul id="entries">
-          <li
-            v-for="entry in journalEntries"
-            onmouseenter="addButton(event,entry)"
-            onmouseleave="removeButton(event)"
-            :key="entry.title"
-          >
-            <p onclick="loadPrevious(entry)">{{entry.title}}({{entry.date}}</p>
-          </li>
-        </ul>
+        <ul id="entries" data-tw-bind="entry_list"></ul>
         <button id="back" type="submit" onclick="loadCurrent()">
           <i class="fa fa-arrow-left">New Page</i>
         </button>
