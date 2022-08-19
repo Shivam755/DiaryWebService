@@ -36,7 +36,7 @@ public class DiaryController {
 	}
 	
 	@PutMapping("/diaryentry/{Id}")
-	public int updateEntry(@PathVariable(value  = "Id") int Id, @PathVariable(value ="title") String title, @PathVariable(value ="content")String content,@PathVariable(value ="date") String date ) {
+	public int updateEntry(@PathVariable(value  = "Id") int Id, String title, String content, String date ) {
 		DiaryEntry de = new DiaryEntry();
 		de.setId(Id);
 		de.setTitle(title);
