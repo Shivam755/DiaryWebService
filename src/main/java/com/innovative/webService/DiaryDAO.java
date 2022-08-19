@@ -34,8 +34,7 @@ public class DiaryDAO {
 			ps.setString(1, de.getTitle());
 			ps.setString(2, de.getContent());
 			ps.setInt(3, de.getId());
-			status = ps.executeUpdate();
-			
+			status = ps.executeUpdate();		
 			System.out.println("Records Updated!");
 			con.close();
 		}catch(Exception e) {
