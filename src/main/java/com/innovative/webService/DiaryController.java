@@ -10,12 +10,7 @@ public class DiaryController {
 	@GetMapping("/entries")
 	public List<DiaryEntry> viewAllEntries() {
 		List<DiaryEntry> list = DiaryDAO.getAllEntries();
-//		for(DiaryEntry de:list) {
-//			System.out.println(" ");
-//			System.out.println(de.getContent());
-//			System.out.println(de.getDate());
-//			System.out.println(de.getId());
-//			System.out.println(de.getTitle());
+
 //		}
 		return list;
 	}
@@ -26,23 +21,17 @@ public class DiaryController {
 		DiaryDAO dao = new DiaryDAO();
 		int status = dao.delete(Id);
 		return status;
-//		if (status==1) {
-//			//Something
-//			return status;
-//		}
-//		else {
-//			//Something
-//		}
+	
 	}
 	
 	@PutMapping("/diaryentry/{Id}")
-	public int updateEntry(@PathVariable(value  = "Id") int Id, String title, String content, String date ) {
-		DiaryEntry de = new DiaryEntry();
-		de.setId(Id);
-		de.setTitle(title);
-		de.setContent(content);
-		de.setDate(date);
-		int status = DiaryDAO.update(de);
+	public int updateEntry(@RequestBody DiaryEntry de, @PathVariable(value  = "Id") int Id) {
+		DiaryEntry de1 = DiaryDAO.getEntryByID(Id);
+		de1.setId(Id);
+		de1.setTitle(de.getTitle());
+		de1.setContent(de.getContent());
+		de1.setDate(de.getDate());
+		int status = DiaryDAO.update(de1);
 		return status;	
 	}
 	}
