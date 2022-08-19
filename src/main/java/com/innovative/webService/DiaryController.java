@@ -38,7 +38,15 @@ public class DiaryController {
 
 	@CrossOrigin(origins = "http://127.0.0.1:5500")
 	@PutMapping("/diaryentry/{Id}")
+<<<<<<< Updated upstream
 	public int updateEntry(@PathVariable(value = "Id") int Id, String title, String content, String date) {
+=======
+<<<<<<< HEAD
+	public int updateEntry(@PathVariable(value  = "Id") int Id, @PathVariable(value ="title") String title, @PathVariable(value ="content")String content,@PathVariable(value ="date") String date ) {
+=======
+	public int updateEntry(@PathVariable(value = "Id") int Id, String title, String content, String date) {
+>>>>>>> a21006a82815e3cac7b701216e648a6b0247d6dc
+>>>>>>> Stashed changes
 		DiaryEntry de = new DiaryEntry();
 		de.setId(Id);
 		de.setTitle(title);
