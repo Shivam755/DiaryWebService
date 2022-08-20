@@ -6,7 +6,6 @@ const entry_body = document.getElementById("entry");
 const update = document.getElementById("update");
 const back = document.getElementById("back");
 const submit = document.getElementById("submit");
-// let scope['entry_list'];
 let current_id = 0;
 var elements = document.querySelectorAll('[data-tw-bind]'), scope = {};
 let date = new Date();
@@ -106,7 +105,10 @@ const fetchList = ()=>{
     .then(data=>{
         scope['entry_list'] = data;
         let container = document.getElementById('entries');
-
+        //removing children if any
+        while (container.lastChild) {
+            container.removeChild(container.lastChild);
+        }
         if (scope['entry_list'].length <= 0){
             li = document.createElement('li');
             li.textContent = "No entries yet!!!";
@@ -115,7 +117,6 @@ const fetchList = ()=>{
         }
 
         for(let page of scope['entry_list']){
-            console.log(page)
             //Creating an li
             li = document.createElement('li');
             AddButtonHandler(li,page);
@@ -138,6 +139,8 @@ const fetchList = ()=>{
         let entry_date = new Date(last_entry.date);
         entry_date = entry_date.getDate()+"/"+entry_date.getMonth()+"/"+entry_date.getFullYear();
         if (entry_date === today){
+            update.style.display = "block";
+            submit.style.display = "none";
             current_id = last_entry.id;
             scope['title'] = last_entry.title;
             scope['data'] = last_entry.content;
@@ -156,18 +159,22 @@ const setup = ()=>{
     fetchList();
 }
 
-// TODO: verify correctness
+
 const updateEntry = () =>{
     console.log("update clicked");
+    console.log(scope['title'])
+    console.log(scope["data"])
+    console.log(current_id)
+    console.log({
+        title: scope['title'],
+        content: scope['data']
+    })
     // sending the update
     fetch(baseURL+"/diaryentry/"+current_id,{
         method:"PUT",
-        body:{
-            entry:{
-                title: scope['title'],
-                content: scope['data'],
-            }
-        }
+        headers: {"Content-type": "application/json;charset=UTF-8"},
+        body:JSON.stringify({title: scope['title'],
+            content: scope['data']})
     }).then((response) =>{
         console.log(response);
         if (response.status == 200){
@@ -179,7 +186,6 @@ const updateEntry = () =>{
     })
 }
 
-// TODO: verify the correctness
 const submitEntry = () =>{
     console.log("Submit clicked");
     if (scope['title'].trim() === ""){
@@ -191,29 +197,29 @@ const submitEntry = () =>{
         return;
     }
 
-    // fetch(baseURL+"/add",{
-    //     method:"POST",
-    //     body:{
-    //         entry:{
-    //             id: scope['entry_list'][scope['entry_list'].length - 1].id + 1,
-    //             heading: scope['title'],
-    //             content: scope['data'],
-    //         }
-    //     }
-    // }).then((response) =>{
-    //     if (response.status == 200){
-    //         alert("Entry added");
+    fetch(baseURL+"/diaryentry",{
+        method:"POST",
+        headers: {"Content-type": "application/json;charset=UTF-8"},
+        body:JSON.stringify({
+            title: scope['title'],
+            content: scope['data'],
+        })
+    }).then((response) =>{
+        if (response.status == 200){
+            alert("Entry added");
+            fetchList()
 
-    //     }else{
-    //         alert("There was some issue on the server end!!");
-    //     }
-    // })
+        }else{
+            alert("There was some issue on the server end!!");
+        }
+    })
 
 }
 
 const loadCurrent = () =>{
     back.style.display = "none";
-    submit.style.display = "block"; 
+    submit.style.display = "block";
+    update.style.display = "none"
     entry_title.disabled = false;
     entry_body.disabled = false;
 

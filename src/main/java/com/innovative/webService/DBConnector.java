@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBConnector {
-	static final String DB_URL = "jdbc:mysql://localhost:3306/diary?characterEncoding=latin1";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/jr_college?characterEncoding=latin1";
 	static final String USER = "diaryUser";
 	static final String PASS = "passwordWS";
 	public static Connection makeConnection() {
